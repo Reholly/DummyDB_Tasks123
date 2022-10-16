@@ -18,6 +18,11 @@
             List<Reader> readers = new List<Reader>();
             List<Book> books = new List<Book>();
 
+            if (readersData == null || booksData == null)
+            {
+                return;
+            }
+
             foreach(string item in readersData)
             {
                 string[] elements = item.Split(";");

@@ -19,10 +19,18 @@ namespace DummyDB_Task1
             var lines = File.ReadAllLines(filePath);
             var schema = JSONSchemaValidator.GetSchema(schemaPath);
 
-            if (JSONSchemaValidator.IsValidToSchema(lines, schema))
+            try
             {
-                lines = lines.Skip(1).ToArray();
-                return lines;
+                if (JSONSchemaValidator.IsValidToSchema(lines, schema))
+                {
+                    lines = lines.Skip(1).ToArray();
+                    return lines;
+                }
+            }
+            catch(FormatException ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("The program will finished. Check your data and correct it, and try again later.");
             }
             return null;
         }
